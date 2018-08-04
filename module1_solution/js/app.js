@@ -14,8 +14,8 @@
     $scope.messageString = "";
     $scope.messageClass = "";
 
-    $scope.checkNumberOfDishes = function(separator, cssValidInputClassName, cssInvalidInputClassName){/*,
-                                          validNumOfDishMsg, invalidNumOfDishMsg, invalidEntryMsg){*/
+    $scope.checkNumberOfDishes = function(separator, cssValidInputClassName, cssInvalidInputClassName,
+                                          validNumOfDishMsg, invalidNumOfDishMsg, invalidEntryMsg){
 
       // Split the string
       var arrayOfStrings = splitString( $scope.lunchItems, separator);
@@ -35,13 +35,13 @@
       var msgStr = "";
       var msgColor = "";
       if(itemCount > 3){
-        msgStr = "Too much!";
+        msgStr = invalidNumOfDishMsg;
         msgColor = cssValidInputClassName;
       } else if (itemCount <= 0){
-        msgStr = "Please enter data first!!";
+        msgStr = invalidEntryMsg;
         msgColor = cssInvalidInputClassName;
       } else {
-        msgStr = "Enjoy!";
+        msgStr = validNumOfDishMsg;
         msgColor = cssValidInputClassName;
       }
 
