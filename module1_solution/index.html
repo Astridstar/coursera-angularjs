@@ -20,9 +20,12 @@
                 <span class="special_note">Please note that empty items between the commas are not considered towards to the count, i.e. , , , are not considered as an item.</span>
             </div>
             <div class="form-group input_div">
-                <button class="btn btn-default" ng-click="checkNumberOfDishes(',')">Check If Too Much</button>
+                <button class="btn btn-default" 
+                    ng-click="checkNumberOfDishes(',','valid_input', 'invalid_input')">
+                    Check If Too Much
+                </button>
             </div>
-            <div class="form-group message" ng-class="messageColorCode">
+            <div class="form-group message" ng-class="messageClass">
                 <!-- Your message can go here. -->
                 {{messageString}}
             </div>
