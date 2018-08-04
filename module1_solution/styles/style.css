@@ -1,0 +1,37 @@
+body {
+	font-family: 'PT Sans', sans-serif;
+	font-size: 16px; //font-weight: bold;
+}
+
+.input_div {
+	margin: 5px 0;
+}
+
+.message {
+	font-size: 1.3em;
+	font-weight: bold;
+	margin: 8px 0;
+	text-align: center;
+}
+
+.special_note{
+	font-size: 0.8em;
+	font-weight: normal;
+	font-style: italic;
+}
+
+.valid_input{
+	color: rgb(0, 255, 0);
+	border: 5px solid;
+	border-radius: 3px;
+	border-color: rgb(0, 255, 0);
+
+}
+
+.invalid_input{
+	color: rgb(255, 0, 0);
+	border: 5px solid;
+	border-radius: 3px;
+	border-color: rgb(255, 0, 0);
+}
+
