@@ -14,17 +14,12 @@
     toBuyControllerObject.onBoughtEvent = function(itemIndex){
       ShoppingListCheckOffService.boughtItem (itemIndex);
     };
-
-    console.log("To buy controller at startup: ", toBuyControllerObject);
   } /* function ToBuyController */
 
   AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
   function AlreadyBoughtController(ShoppingListCheckOffService) {
     var boughtControllerObject = this;
     boughtControllerObject.boughtItems = ShoppingListCheckOffService.getBoughtItems();
-    boughtControllerObject.isBoughtItemsEmpty = ShoppingListCheckOffService.getIsBoughtItemsEmpty();
-
-    console.log("Bought Items at startup: ", boughtControllerObject);
   } /* function AlreadyBoughtController */
 
   // Service
@@ -40,7 +35,6 @@
       { quantity: "1 jar", desc: "Peanut Butter"}];
 
     var boughtItemList = [];
-    var isBoughtItemsEmpty = true;
 
     service.boughtItem = function(itemIndex) {
         // Get item description/label from the toBuyList
@@ -55,10 +49,7 @@
         toBuyItemsList.splice(itemIndex, 1);
 
         // Add item to the boughtItemList
-        isBoughtItemsEmpty = false;
         boughtItemList.push(theBoughtItem);
-        console.log("Bought Items are: ", boughtItemList);
-        console.log("Flag Value is : ", isBoughtItemsEmpty);
     };
 
     service.getToBuyItems = function () {
@@ -68,11 +59,6 @@
     service.getBoughtItems = function () {
       return boughtItemList;
     };
-
-    service.getIsBoughtItemsEmpty = function () {
-      return isBoughtItemsEmpty;
-    };
-
   }// function ShoppingListCheckOffService() {
 
 })();
