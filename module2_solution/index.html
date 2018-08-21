@@ -15,9 +15,9 @@
         <h1>Shopping List Check Off</h1>
         <div class="row">
             <div ng-controller="ToBuyController as buyController" class="col-md-6">
-                <h2>To buy item list:</h2>
+                <h2>To buy items:</h2>
                 <ul>
-                    <li ng-repeat="item in buyController.items">Buy {{item.quantity}} of {{item.desc}}
+                    <li ng-repeat="item in buyController.items">Buy {{item.quantity}} {{item.desc}}
                         <button class="btn btn-default" ng-click="buyController.onBoughtEvent($index);">
                       <span class="glyphicon glyphicon-ok"></span>
                       <span>Bought</span>
@@ -28,7 +28,7 @@
             </div>
 
             <div ng-controller="AlreadyBoughtController as boughtCtl" class="col-md-6">
-                <h2>Already bought item list: </h2>
+                <h2>Already bought items: </h2>
                 <ul>
                     <li ng-repeat="item in boughtCtl.boughtItems">Bought {{item.quantity}} {{item.desc}}</li>
                 </ul>

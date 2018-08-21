@@ -26,13 +26,12 @@
   function ShoppingListCheckOffService() {
     var service = this;
 
-    // var toBuyItemsList = ["Milk", "Donuts", "Cookies", "Chocolate", "Peanut Butter"];
     var toBuyItemsList = [
-      { quantity: "2 cartons", desc: "Milk"},
-      { quantity: "5", desc: "Donuts"},
-      { quantity: "20 bags", desc: "Cookies"},
-      { quantity: "10 boxes", desc: "Chocolate"},
-      { quantity: "1 jar", desc: "Peanut Butter"}];
+      { quantity: 2, desc: "Milk"},
+      { quantity: 5, desc: "Donuts"},
+      { quantity: 2, desc: "Cookies"},
+      { quantity: 10, desc: "Chocolate"},
+      { quantity: 1, desc: "Peanut Butter"}];
 
     var boughtItemList = [];
 
@@ -61,4 +60,4 @@
     };
   }// function ShoppingListCheckOffService() {
 
-})();
+})(); // ( function(){ IIFE
