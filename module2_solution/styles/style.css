@@ -1,0 +1,23 @@
+body {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 16px;
+}
+
+.WarningMessage {
+  font-size: 1.2em;
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+}
+
+li {
+  margin-bottom: 7px;
+  font-size: 1.2em;
+}
+
+li>button {
+  margin-left: 6px;
+}
+
+button>span {
+  color: green;
+}
