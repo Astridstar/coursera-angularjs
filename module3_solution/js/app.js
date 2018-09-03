@@ -5,6 +5,7 @@ angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
 .service('MenuSearchService', MenuSearchService)
 .directive('foundItems', DisplayContent)
+.constant('SearchResultMessage', "Nothing found.")
 .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com");
 
 function DisplayContent(){
@@ -34,10 +35,12 @@ function DisplayContentLink(scope, element, attrs, controller) {
     //console.log("Old value: ", oldValue);
     //console.log("New value: ", newValue);
     if (newValue == true) {
-      element.find('div.loader').css('display', 'block');
+      element.find('div.loader').css('display', 'inline-block');
+      element.find('div.searchContent').css('display', 'none');
     }
     else {
       element.find('div.loader').css('display', 'none');
+      element.find('div.searchContent').css('display', 'inline-block');
     }
   });
 
@@ -46,23 +49,38 @@ function DisplayContentLink(scope, element, attrs, controller) {
   }
 };
 
-NarrowItDownController.$inject = ['$scope', 'MenuSearchService'];
-function NarrowItDownController($scope, MenuSearchService) {
+NarrowItDownController.$inject = ['$scope', 'MenuSearchService', 'SearchResultMessage'];
+function NarrowItDownController($scope, MenuSearchService, SearchResultMessage) {
   var self = this;
   var userInput = '';
   var found = [];
   var isSearching = 0;
+  var message = '';
 
   self.getMatchedMenuItems = function(searchTerm){
+    self.message = '';
+
+    if(self.found !== undefined && self.found.length !== 0){
+        self.found = [];
+    }
+    if(searchTerm == undefined || searchTerm === ''){
+      self.message = SearchResultMessage;
+      return;
+    }
+
     self.isSearching = 1;
     var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
     promise.then(function(response){
       self.found = promise.found;
       self.isSearching = 0;
+      if(self.found === undefined || self.found.length === 0){
+        self.message = SearchResultMessage;
+      }
     })
     .catch(function (error) {
       console.log("Something went terribly wrong.");
       self.isSearching = 0;
+      self.message = SearchResultMessage;
     });
   };
 
