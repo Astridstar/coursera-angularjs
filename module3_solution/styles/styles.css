@@ -1,14 +1,17 @@
 h1 {
   margin-bottom: 30px;
 }
+
 input[type="text"] {
   width: 200px;
   float: left;
 }
+
 .narrow-button {
   float: left;
   margin-left: 10px;
 }
+
 .loader {
   display: none;
   margin-left: 5px;
@@ -24,12 +27,19 @@ input[type="text"] {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-.loader,
-.loader:after {
+
+.loader, .loader:after {
   border-radius: 50%;
   width: 3em;
   height: 3em;
 }
+
+.searchContent {
+  margin: auto;
+  border: 5px, solid;
+  border-color: black;
+}
+
 @-webkit-keyframes load8 {
   0% {
     -webkit-transform: rotate(0deg);
@@ -40,6 +50,7 @@ input[type="text"] {
     transform: rotate(360deg);
   }
 }
+
 @keyframes load8 {
   0% {
     -webkit-transform: rotate(0deg);

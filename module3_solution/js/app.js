@@ -30,17 +30,14 @@ function DisplayContentController(){
 }; // function DisplayContentController()
 
 function DisplayContentLink(scope, element, attrs, controller) {
-  console.log("DisplayContentLink");
-  //element.find('div').css('display', 'block');
-
   scope.$watch('display.isSearching', function (newValue, oldValue) {
-    console.log("Old value: ", oldValue);
-    console.log("New value: ", newValue);
+    //console.log("Old value: ", oldValue);
+    //console.log("New value: ", newValue);
     if (newValue == true) {
-      element.find('div').css('display', 'block');
+      element.find('div.loader').css('display', 'block');
     }
     else {
-      element.find('div').css('display', 'none');
+      element.find('div.loader').css('display', 'none');
     }
   });
 
@@ -58,11 +55,8 @@ function NarrowItDownController($scope, MenuSearchService) {
 
   self.getMatchedMenuItems = function(searchTerm){
     self.isSearching = 1;
-    //console.log("getMatchedMenuItems triggered");
     var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
     promise.then(function(response){
-      //console.log("Response added to promise: ");
-      //console.log(promise.found);
       self.found = promise.found;
       self.isSearching = 0;
     })
@@ -73,7 +67,9 @@ function NarrowItDownController($scope, MenuSearchService) {
   };
 
   self.removeItem = function(index){
-    found.splice(index, 1);
+    console.log("Removed item : ");
+    console.log(self.found[index]);
+    self.found.splice(index, 1);
   };
 } // function NarrowItDownController(MenuSearchService)
 
