@@ -13,12 +13,13 @@ function DisplayContent(){
     scope: {
       title: '@',
       onFound: '<',
+      isSearching: '<',
       onRemove: '&'
     },
     controller: DisplayContentController,
     controllerAs: 'display',
     bindToController: true,
-    //link: DisplayContentLink,
+    link: DisplayContentLink,
     templateUrl: 'content-template.html'
   };
   return ddo;
@@ -28,19 +29,46 @@ function DisplayContentController(){
   var self = this;
 }; // function DisplayContentController()
 
-NarrowItDownController.$inject = ['MenuSearchService'];
-function NarrowItDownController(MenuSearchService) {
+function DisplayContentLink(scope, element, attrs, controller) {
+  console.log("DisplayContentLink");
+  //element.find('div').css('display', 'block');
+
+  scope.$watch('display.isSearching', function (newValue, oldValue) {
+    console.log("Old value: ", oldValue);
+    console.log("New value: ", newValue);
+    if (newValue == true) {
+      element.find('div').css('display', 'block');
+    }
+    else {
+      element.find('div').css('display', 'none');
+    }
+  });
+
+  function enableLoader(toShow){
+    element.find('div').css('display', (toShow === true ? 'block' : 'none'));
+  }
+};
+
+NarrowItDownController.$inject = ['$scope', 'MenuSearchService'];
+function NarrowItDownController($scope, MenuSearchService) {
   var self = this;
   var userInput = '';
   var found = [];
+  var isSearching = 0;
 
   self.getMatchedMenuItems = function(searchTerm){
-    console.log("getMatchedMenuItems triggered");
+    self.isSearching = 1;
+    //console.log("getMatchedMenuItems triggered");
     var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
     promise.then(function(response){
-      console.log("Response added to promise: ");
-      console.log(promise.found);
+      //console.log("Response added to promise: ");
+      //console.log(promise.found);
       self.found = promise.found;
+      self.isSearching = 0;
+    })
+    .catch(function (error) {
+      console.log("Something went terribly wrong.");
+      self.isSearching = 0;
     });
   };
 
@@ -58,22 +86,13 @@ function MenuSearchService($http, ApiBasePath) {
       method: "GET",
       url: (ApiBasePath + "/menu_items.json")
     });
-
     return response;
   };
 
   self.getMatchedMenuItems = function(searchTerm){
-    console.log("Service - SearchTerm = " + searchTerm);
-
     var promise = self.retrieveMenuItems();
-
     promise.then(function (response) {
-      //console.log("Unfiltered Response received: ");
-      //console.log(response.data);
-
       promise.found = self.search(searchTerm, response.data.menu_items);
-      //console.log("Response added to promise: ");
-      //console.log(promise.found);
     })
     .catch(function (error) {
       console.log("Something went terribly wrong.");
@@ -82,7 +101,6 @@ function MenuSearchService($http, ApiBasePath) {
   };
 
   self.search = function(searchTerm, menuItems){
-    //console.log("SearchTerm = " + searchTerm + " & MenuItems = " + menuItems);
     var matchingItems = [];
     if( menuItems !== undefined){
       for(var i = 0; i < menuItems.length; i++){
@@ -91,8 +109,6 @@ function MenuSearchService($http, ApiBasePath) {
         }
       }
     }
-    //console.log("Items matching => " + searchTerm);
-    //console.log(matchingItems);
     return matchingItems;
   };
 } // function MenuSearchService($http, ApiBasePath)
