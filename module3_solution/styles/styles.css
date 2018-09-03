@@ -41,6 +41,20 @@ input[type="text"] {
   border-color: black;
 }
 
+.pointsToNote {
+  clear: both;
+  display: block;
+  font-size: 0.8em;
+  font-style: italic;
+  /* margin-left: 10px; */
+}
+
+.searchResultMessage {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
 @-webkit-keyframes load8 {
   0% {
     -webkit-transform: rotate(0deg);

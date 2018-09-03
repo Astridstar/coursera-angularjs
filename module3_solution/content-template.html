@@ -1,11 +1,27 @@
-<div class="loader">  </div>
-<div class="d-block searchContent">
-  <!-- <h2>Template Directive Display</h2> -->
-  <ul>
-    <li ng-repeat="item in display.onFound">
-      {{item.name}} , {{item.short_name}}, {{item.description}}
-      <button class="btn btn-primary" ng-click="display.onRemove({index: $index});">Don't want this one!</button>
-    </li>
-  </ul>
-  <!-- <div class="error" ng-if="display.hasFoundItems()">Nothing found!</div> -->
+<!-- Show/Hide the laoding icon -->
+<div class="loader"></div>
+
+<!-- Data to be displayed, formated into table view -->
+<div class="searchContent" ng-show="display.onFound.length">
+  <h2>Search Results: </h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Short Name</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Remove?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in display.onFound">
+        <td>{{item.short_name}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.description}}</td>
+        <td>
+          <button class="btn btn-primary" ng-click="display.onRemove({index: $index});">Don't want this one!</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
