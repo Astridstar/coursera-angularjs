@@ -1,0 +1,10 @@
+<!-- <div class="loader"> -->
+  <h2>Template Directive Display</h2>
+  <ul>
+    <li ng-repeat="item in display.onFound">
+      {{item.name}} , {{item.short_name}}, {{item.description}}
+      <button class="btn btn-primary" ng-click="display.onRemove({index: $index});">Don't want this one!</button>
+    </li>
+  </ul>
+  <!-- <div class="error" ng-if="display.hasFoundItems()">Nothing found!</div> -->
+<!-- </div> -->

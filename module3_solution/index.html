@@ -15,18 +15,37 @@
             <h1>Narrow Down Your Chinese Menu Choice</h1>
 
             <div class="form-group">
-                <input type="text" placeholder="search term" class="form-control" ng-model="listController.searchTerm">
+                <input type="text" placeholder="search term" class="form-control" ng-model="listController.userInput">
             </div>
             <div class="form-group narrow-button">
-                <button class="btn btn-primary" ng-click="listController.getMatchedMenuItems(listController.searchTerm)">Narrow It Down For Me!</button>
+                <button class="btn btn-primary" ng-click="listController.getMatchedMenuItems(listController.userInput)">Narrow It Down For Me!</button>
             </div>
 
-            <!-- found-items should be implemented as a component -->
-            <found-items found="listController.found" on-remove="listController.removeItem(index)">
-                <div ng-if="listController.found.length === 0">
-                    Nothing found
-                </div>
-            </found-items>
+            <br><br><br><br>
+
+            <div>
+
+                <!-- found-items should be implemented as a component -->
+                <found-items on-found="listController.found" on-remove="listController.removeItem(index)">
+                    <!-- <div ng-if="listController.found.length === 0">
+                        Nothing found
+                    </div> -->
+                </found-items>
+            </div>
+
+            <br><br><br><br>
+
+            <div>
+                <h2>Local display</h2>
+                <ul>
+                    <li ng-repeat="item in listController.found">
+                        {{ item.name }}, {{ item.short_name }}, {{ item.description }}
+                        <!-- <button class="btn btn-primary" ng-click="listController.onRemove($index}">Don't want this one!</button> -->
+                    </li>
+                </ul>
+            </div>
+
+
         </div>
 
     </body>
